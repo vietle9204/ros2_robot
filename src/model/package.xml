@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>model</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="vietle9204@todo.todo">vietle9204</maintainer>
+  <license>Apache-2.0</license>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  
+ <!-- Build tool -->
+  <buildtool_depend>ament_python</buildtool_depend>
+  <buildtool_depend>xacro</buildtool_depend>
+
+  <!-- Run-time dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>xacro</depend>
+  <depend>urdf</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_ros2_control</depend>
+  <depend>controller_manager</depend>
+  <depend>diff_drive_controller</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>gz_sim_vendor</depend>
+  <depend>gz_plugin_vendor</depend>
+  <depend>pluginlib</depend>
+  <depend>hardware_interface</depend>
+
+  <!-- Exec dependencies -->
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>ros2_control_node</exec_depend>
+  
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

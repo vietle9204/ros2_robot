@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="robot_2wd">
+    <link name="base_link">
+      <visual name="base_vis">
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.05</size>
+          </box>
+        </geometry>
+        <pose>0 0 0.05 0 0 0</pose>
+      </visual>
+    </link>
+
+    <link name="chassis">
+      <visual name="chassis_vis">
+        <geometry>
+          <cylinder>
+            <radius>0.2</radius>
+            <length>0.05</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 0 0.8 1</ambient>
+        </material>
+      </visual>
+      <collision name="chassis_col">
+        <geometry>
+          <cylinder>
+            <radius>0.2</radius>
+            <length>0.1</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="chassis_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>chassis</child>
+      <pose>0 0 0.05 0 0 0</pose>
+    </joint>
+
+    <!-- LEFT WHEEL -->
+    <link name="left_wheel">
+      <visual name="left_vis">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>0.03</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 0.8 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="left_wheel_joint" type="revolute">
+      <pose>0 -0.2 0 1.5708 0 0</pose>
+      <parent>chassis</parent>
+      <child>left_wheel</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- RIGHT WHEEL -->
+    <link name="right_wheel">
+      <visual name="right_vis">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>0.03</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 0.8 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="right_wheel_joint" type="revolute">
+      <pose>0 0.2 0 1.5708 0 0</pose>
+      <parent>chassis</parent>
+      <child>right_wheel</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- SUPPORT BALLS -->
+    <link name="top_wheel">
+      <visual name="top_vis">
+        <geometry>
+          <sphere>
+            <radius>0.0125</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0 0.8 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="top_wheel_joint" type="fixed">
+      <pose>-0.15 0 -0.0375 0 0 0</pose>
+      <parent>chassis</parent>
+      <child>top_wheel</child>
+    </joint>
+
+    <link name="back_wheel">
+      <visual name="back_vis">
+        <geometry>
+          <sphere>
+            <radius>0.0125</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0 0.8 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="back_wheel_joint" type="fixed">
+      <pose>0.15 0 -0.0375 0 0 0</pose>
+      <parent>chassis</parent>
+      <child>back_wheel</child>
+    </joint>
+
+    <!-- Gazebo Harmonic ROS 2 Control Plugin -->
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin"
+        filename="libgz_ros2_control-system.so">
+      <ros>
+        <namespace>/</namespace>
+        <parameters>/home/vietle9204/ros2_2wd_ws/src/robot_2wd_gazebo/config/diff_drive_controller.yaml</parameters>
+      </ros>
+    </plugin>
+    
+    <plugin
+      filename="gz-sim-gui-system"
+      name="gz::sim::systems::GUI">
+      <arg>--verbose</arg>   <!-- tùy chọn, ví dụ hiển thị log chi tiết -->
+    </plugin>
+
+  </model>
+</sdf>
+
